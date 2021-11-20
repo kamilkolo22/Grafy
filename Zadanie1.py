@@ -15,12 +15,13 @@ def random_graph(n, p):
 
 
 def graph_to_matrix(graph):
+    vertices = list(graph.keys())
     n = len(graph)
     matrix = np.zeros((n, n)).astype(int)
     for v in graph:
         for e in graph[v]:
-            matrix[v-1][e-1] += 1
-    return matrix
+            matrix[vertices.index(v)][vertices.index(e)] += 1
+    return matrix, vertices
 
 
 def matrix_to_graph(vertices, matrix):
@@ -31,7 +32,7 @@ def matrix_to_graph(vertices, matrix):
     for i in range(n):
         for j in range(n):
             if matrix[i][j] > 0:
-                graph[vertices[i]].append(j+1)
+                graph[vertices[i]].append(vertices[j])
     return graph
 
 
@@ -39,7 +40,8 @@ def matrix_to_graph(vertices, matrix):
 seed(2021)
 graph = random_graph(5, 0.5)
 print(graph)
-matrix = graph_to_matrix(graph)
+matrix = graph_to_matrix(graph)[0]
+print(graph_to_matrix(graph)[1])
 print_graph(graph)
 print(matrix)
 g = matrix_to_graph(['a', 'b', 'c', 'd', 'e'], matrix)
