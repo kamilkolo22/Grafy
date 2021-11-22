@@ -36,13 +36,14 @@ def matrix_to_graph(vertices, matrix):
     return graph
 
 
-# Testy
-seed(2021)
-graph = random_graph(5, 0.5)
-print(graph)
-matrix = graph_to_matrix(graph)[0]
-print(graph_to_matrix(graph)[1])
-print_graph(graph)
-print(matrix)
-g = matrix_to_graph(['a', 'b', 'c', 'd', 'e'], matrix)
-print(g)
+if __name__ == '__main__':
+    # Testy
+    seed(2021)
+    graph = random_graph(5, 0.5)
+    print(graph)
+    matrix = graph_to_matrix(graph)[0]
+    print(graph_to_matrix(graph)[1])
+    print_graph(graph)
+    print(matrix)
+    g = matrix_to_graph(['a', 'b', 'c', 'd', 'e'], matrix)
+    print(g)
