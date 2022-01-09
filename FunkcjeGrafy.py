@@ -48,3 +48,27 @@ def add_edge(graph, edge):
         graph[u].append(v)
     if u not in graph[v]:
         graph[v].append(u)
+
+
+def graph_from_edges(filename, directed=False):
+    """Wczytuję graf z pliku tesktowego, który w każdej lini zawiera opis jednej krawędzi oraz waga danej krawedzi"""
+    graph = {}
+    with open(filename, 'r') as f:
+        for line in f:
+            words = line.split()
+            if len(words) == 1:
+                add_vertex(graph, words[0])
+            elif len(words) == 2:
+                if directed:
+                    add_arc(graph, (words[0], words[1]))
+                else:
+                    add_edge(graph, (words[0], words[1]))
+            elif len(words) >= 3:
+                if directed:
+                    add_arc(graph, (words[0], words[1]))
+                    graph[words[0]][-1] = (words[1], words[2])
+                else:
+                    add_edge(graph, (words[0], words[1]))
+                    graph[words[0]][-1] = (words[1], words[2])
+                    graph[words[1]][-1] = (words[0], words[2])
+    return graph
